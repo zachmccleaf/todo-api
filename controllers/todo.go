@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -17,6 +18,7 @@ var collection = helper.ConnectDB()
 
 func GetTodos(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	var todos []models.Todo
 
@@ -49,6 +51,7 @@ func GetTodos(w http.ResponseWriter, r *http.Request) {
 
 func GetTodo(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	var todo models.Todo
 	var params = mux.Vars(r)
@@ -68,6 +71,8 @@ func GetTodo(w http.ResponseWriter, r *http.Request) {
 
 func CreateTodos(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type, Content-Range, Content-Disposition, Content-Description,Origin, X-Requested-With")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	var todo models.Todo
 
@@ -85,6 +90,8 @@ func CreateTodos(w http.ResponseWriter, r *http.Request) {
 
 func UpdateTodos(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type, Content-Range, Content-Disposition, Content-Description,Origin, X-Requested-With")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	var params = mux.Vars(r)
 
@@ -118,7 +125,10 @@ func UpdateTodos(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteTodos(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+	r.Header.Set("Access-Control-Allow-Origin", "*")
+	r.Header.Set("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+	r.Header.Set("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With, Accept")
+	fmt.Println("DELETE HIT!")
 
 	var params = mux.Vars(r)
 

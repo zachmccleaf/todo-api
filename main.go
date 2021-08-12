@@ -12,11 +12,11 @@ import (
 func main() {
 	r := mux.NewRouter()
 
-	r.HandleFunc("/api/todos", controllers.GetTodos).Methods("GET")
-	r.HandleFunc("/api/todos/{id}", controllers.GetTodo).Methods("GET")
-	r.HandleFunc("/api/todos", controllers.CreateTodos).Methods("POST")
-	r.HandleFunc("/api/todos/{id}", controllers.UpdateTodos).Methods("PUT")
-	r.HandleFunc("/api/todos/{id}", controllers.UpdateTodos).Methods("DELETE")
+	r.HandleFunc("/api/todos", controllers.GetTodos).Methods("GET", "OPTIONS")
+	r.HandleFunc("/api/todos/{id}", controllers.GetTodo).Methods("GET", "OPTIONS")
+	r.HandleFunc("/api/todos", controllers.CreateTodos).Methods("POST", "OPTIONS")
+	r.HandleFunc("/api/todos/{id}", controllers.UpdateTodos).Methods("PUT", "OPTIONS")
+	r.HandleFunc("/api/todos/{id}", controllers.DeleteTodos).Methods("DELETE", "OPTIONS")
 
 	config := helper.GetConfiguration()
 	log.Fatal(http.ListenAndServe(config.Port, r))
