@@ -3,7 +3,6 @@ package controllers
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -128,7 +127,6 @@ func DeleteTodos(w http.ResponseWriter, r *http.Request) {
 	r.Header.Set("Access-Control-Allow-Origin", "*")
 	r.Header.Set("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
 	r.Header.Set("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With, Accept")
-	fmt.Println("DELETE HIT!")
 
 	var params = mux.Vars(r)
 
